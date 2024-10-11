@@ -1,0 +1,41 @@
+import numpy as np
+
+def calculate(lst):
+    # Step 1: Input Validation
+    # Check if the input list contains exactly 9 elements. Raise a ValueError if not.
+    if len(lst) != 9:
+        raise ValueError("List must contain nine numbers.")
+    
+    # Step 2: Convert the input list to a 3x3 NumPy array
+    arr = np.array(lst).reshape(3, 3)
+    
+    # Step 3: Calculate the required statistics for each axis and the flattened matrix
+    calculations = {
+        # Mean: Calculate mean across columns (axis=0), rows (axis=1), and entire matrix
+        'mean': [arr.mean(axis=0).tolist(), arr.mean(axis=1).tolist(), arr.mean()],
+        
+        # Variance: Calculate variance across columns, rows, and entire matrix
+        'variance': [arr.var(axis=0).tolist(), arr.var(axis=1).tolist(), arr.var()],
+        
+        # Standard Deviation: Calculate standard deviation across columns, rows, and entire matrix
+        'standard deviation': [arr.std(axis=0).tolist(), arr.std(axis=1).tolist(), arr.std()],
+        
+        # Max: Find the maximum value across columns, rows, and entire matrix
+        'max': [arr.max(axis=0).tolist(), arr.max(axis=1).tolist(), arr.max()],
+        
+        # Min: Find the minimum value across columns, rows, and entire matrix
+        'min': [arr.min(axis=0).tolist(), arr.min(axis=1).tolist(), arr.min()],
+        
+        # Sum: Calculate sum across columns, rows, and entire matrix
+        'sum': [arr.sum(axis=0).tolist(), arr.sum(axis=1).tolist(), arr.sum()]
+    }
+    
+    # Return the dictionary containing all calculated values
+    return calculations
+
+# Example usage:
+# Testing the function with a sample list of 9 digits
+result = calculate([0, 1, 2, 3, 4, 5, 6, 7, 8])
+
+# Print the result to see the statistical measures
+print(result)
